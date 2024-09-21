@@ -1,0 +1,537 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css"
+      rel="stylesheet"
+    />
+
+    <title>Transfer Funds - Sun Trust Bank</title>
+    <style>
+      body {
+        font-family: Helvetica, Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        color: #fff;
+        display: flex;
+        max-height: 100vh;
+        background-color: #ebebeb;
+        overflow: hidden;
+      }
+      .sidebar {
+        width: 20%;
+        background: #292d36;
+        color: #fff;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        padding: 20px;
+        box-shadow: 2px 0 10px rgba(0, 0, 0, 0.2);
+        transition: all 0.3s ease;
+      }
+
+      .sidebar img {
+        max-width: 80%;
+        padding: 30px;
+        height: 40px;
+      }
+
+      .sidebar .top-section {
+        flex-grow: 1;
+      }
+
+      .sidebar .icon-box a {
+        display: flex;
+        align-items: center;
+        padding: 12px 0;
+        font-size: 1rem;
+        color: #fff;
+        text-decoration: none;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        transition: all 0.3s ease;
+      }
+
+      .sidebar .icon-box a:hover {
+        color: rgba(139, 110, 202, 255);
+        transform: translateX(10px);
+      }
+
+      .sidebar .icon-box a i {
+        margin-right: 10px;
+        font-size: 1.5rem;
+      }
+
+      .sidebar .sign-out {
+        background-color: rgba(139, 110, 202, 255);
+        padding: 10px 20px;
+        text-align: center;
+        border-radius: 30px;
+        color: #fff;
+        text-decoration: none;
+        font-weight: bold;
+        transition: all 0.3s ease;
+      }
+
+      .sidebar .sign-out:hover {
+        background-color: rgba(139, 110, 202, 255);
+        transform: scale(1.05);
+      }
+
+      .content {
+        flex: 1;
+        max-width: 80%;
+        display: flex;
+        flex-direction: column;
+        flex-grow: 1;
+        padding: 30px;
+        gap: 30px;
+        background-color: #ebebeb;
+        overflow-y: auto;
+      }
+      .payment-box {
+        display: flex;
+        flex-direction: column;
+        padding: 10px;
+        gap: 15px;
+      }
+      .payment-box span {
+        color: rgb(35, 35, 35);
+        font-size: 1rem;
+      }
+      .payment-box p {
+        color: rgb(35, 35, 35);
+        font-size: 1rem;
+        max-width: 80%;
+      }
+      .payment-box .payment-transfer,
+      .payment-box .transfer-details {
+        display: flex;
+        flex-direction: column;
+        max-width: 70%;
+      }
+
+      .payment-box .select-bank,
+      .payment-box .transfer-note {
+        display: flex;
+        align-items: center;
+        max-width: 70%;
+      }
+      .payment-box .select-bank .text {
+        flex: 2;
+        font-size: 1rem;
+      }
+
+      .dropdown-wrapper {
+        position: relative;
+        display: flex;
+        align-items: center;
+        flex: 2;
+      }
+
+      .bank-dropdown {
+        width: 100%;
+        padding: 10px;
+        background-color: #f9f9f9;
+        border-radius: 5px;
+        border: 1px solid #ccc;
+        appearance: none; /* Remove default dropdown arrow */
+        font-size: 16px;
+        color: #333;
+        padding-right: 40px; /* Leave space for the icon */
+      }
+
+      .selected-icon {
+        position: absolute;
+        right: 10px;
+        pointer-events: none;
+        font-size: 20px;
+        color: #333;
+      }
+
+      .bank-dropdown:focus {
+        outline: none;
+        border-color: rgba(139, 110, 202, 255);
+        box-shadow: 0 0 5px rgba(139, 110, 202, 255);
+      }
+
+      .dropdown-wrapper::after {
+        content: "\f078"; /* FontAwesome down arrow, adjust as necessary */
+        font-family: "FontAwesome";
+        position: absolute;
+        right: 10px;
+        top: 50%;
+        transform: translateY(-50%);
+        pointer-events: none;
+        color: #333;
+      }
+      .transfer-note {
+        display: flex;
+        gap: 10px;
+        margin: 20px 0;
+      }
+
+      .transfer-note .text {
+        margin-bottom: 5px;
+        flex: 1;
+      }
+
+      .transfer-note .text-box {
+        height: auto;
+        max-width: 400px;
+        flex: 3;
+      }
+
+      textarea {
+        width: 100%;
+        height: 100px;
+        background-color: #f9f9f9;
+        border-radius: 5px;
+        border: 1px solid #ccc;
+        padding: 10px;
+        box-sizing: border-box;
+        resize: vertical;
+        margin-top: 0;
+      }
+
+      textarea:focus {
+        outline: none;
+        border-color: #5b2a9b;
+        box-shadow: 0 0 5px rgba(139, 110, 202, 255);
+      }
+
+      h1 {
+        font-size: 2rem;
+        margin-bottom: 20px;
+        color: #5b2a9b;
+      }
+
+      p {
+        font-size: 1.2rem;
+        margin: 10px 0;
+        color: #5b2a9b;
+      }
+      form {
+        display: flex;
+        flex-direction: column;
+        max-width: 70%;
+        gap: 5px;
+        background: rgba(255, 255, 255, 0.1);
+        border-radius: 10px;
+      }
+      form .input-box {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      form label {
+        display: flex;
+        flex: 2;
+        flex-direction: column;
+        align-items: center;
+        margin-bottom: 10px;
+        color: black;
+        max-width: 100px;
+      }
+      form input {
+        flex: 2;
+      }
+      form input,
+      form button {
+        width: 100%;
+        padding: 10px;
+        margin-bottom: 15px;
+        border-radius: 5px;
+        border: 1px solid #ccc;
+      }
+      form button {
+        background-color: rgba(139, 110, 202, 255);
+        color: white;
+        border: none;
+        padding: 8px 32px;
+        border-radius: 4px;
+        cursor: pointer;
+        max-width: 30%;
+        align-self: center;
+      }
+
+      header {
+        position: absolute;
+        top: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 50px;
+        padding: 10px 0 10px 10px;
+        min-width: 100%;
+        margin-bottom: 30px;
+        background: #292d36;
+        display: none;
+        z-index: 100;
+      }
+
+      header img {
+        max-width: 80%;
+        padding: 30px;
+        height: 40px;
+      }
+      header .bx-menu {
+        font-size: 36px;
+        color: white;
+        top: 17px;
+        left: 30px;
+        position: absolute;
+      }
+      .close-btn {
+        display: none;
+      }
+
+      @media screen and (max-width: 320px) {
+        header .bx-menu {
+          left: 10px;
+        }
+      }
+      @media screen and (max-width: 375px) {
+        header .bx-menu {
+          left: 15px;
+        }
+      }
+      @media screen and (max-width: 550px) {
+        header .bx-menu {
+          left: 15px;
+        }
+      }
+
+      @media screen and (max-width: 1024px) {
+        body {
+          max-height: 100vh;
+        }
+        .sidebar img {
+          max-width: 100%;
+          margin-left: -30px;
+        }
+      }
+
+      @media screen and (max-width: 850px) {
+        header {
+          display: flex;
+        }
+
+        .sidebar {
+          width: 0;
+          position: fixed;
+          top: 0;
+          left: -50px;
+          padding-left: 30px;
+          height: 100%;
+          background: #292d36;
+          color: #fff;
+          overflow-x: hidden;
+          z-index: 1000;
+          transition: width 0.3s ease;
+        }
+
+        .sidebar img {
+          max-width: 80%;
+          padding: 20px;
+          height: 40px;
+        }
+
+        /* Sidebar open state */
+        .open-sidebar {
+          width: 100%;
+          margin-left: 30px;
+          margin-bottom: 10px;
+          /* Sidebar takes 100% of the screen width */
+        }
+
+        .close-btn {
+          position: absolute;
+          display: block;
+          top: 45px;
+          right: 40px;
+          background-color: transparent;
+          border: none;
+          font-size: 24px;
+          color: white;
+          cursor: pointer;
+        }
+        .content {
+          width: 100%;
+          max-width: 100%;
+        }
+
+        .payment-transfer {
+          margin-top: 20px;
+        }
+        .payment-box .payment-transfer,
+        .payment-box .transfer-details {
+          max-width: 100%;
+        }
+
+        .payment-box .select-bank,
+        .payment-box .transfer-note {
+          max-width: 100%;
+        }
+        form {
+          max-width: 100%;
+        }
+        .payment-box p {
+          max-width: 100%;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="sidebar">
+      <div class="top-section">
+        <img
+          src="../static/sun-trust-bank-high-resolution-logo-transparent.png"
+          alt="Sun trust Bank Logo"
+        />
+        <div class="icon-box">
+          <a href="{% url 'dashboard' %}">
+            <i class="bx bxs-dashboard"></i> Dashboard
+          </a>
+          <a href="{% url 'transfer_funds' %}">
+            <i class="bx bx-transfer"></i> Transfer Funds
+          </a>
+          <a href="{% url 'transaction_history' %}">
+            <i class="bx bx-history"></i> Transaction History
+          </a>
+          <a href="{% url 'customer_support' %}">
+            <i class="bx bx-support"></i> Customer Support
+          </a>
+        </div>
+      </div>
+      <a href="{% url 'logout' %}" class="sign-out"
+        ><i style="margin-right: 5px" class="bx bx-exit"></i>Sign Out</a
+      >
+    </div>
+    <header>
+      <i class="bx bx-menu" id="menu-toggle"></i>
+      <img
+        src="../static/sun-trust-bank-high-resolution-logo-transparent.png"
+        alt="Sun trust Bank Logo"
+      />
+    </header>
+    <div class="content">
+      <div class="payment-box">
+        <div class="payment-transfer">
+          <h2 style="color: #5b2a9b">Payment Transfer</h2>
+          <span
+            >Please provide any specific details or notes related to the payment
+            transfer</span
+          >
+        </div>
+        <div class="transfer-details">
+          <h2 style="color: #5b2a9b">Transfer details</h2>
+          <span style="margin-bottom: 15px">Enter your transfer details</span>
+        </div>
+        <div class="select-bank">
+          <div class="text">
+            <p style="font-weight: 900">Select Source Bank</p>
+            <p>Select the bank account you want to transfer funds from</p>
+          </div>
+          <div class="dropdown-wrapper">
+            <select name="bank-type" id="bank-type" class="bank-dropdown">
+              <option value="" disabled selected>Select Bank</option>
+              <option value="chase" data-icon="bx bxs-bank">Chase</option>
+              <option value="bank-of-america" data-icon="bx bxs-bank">
+                Bank of America
+              </option>
+              <option value="wells-fargo" data-icon="bx bxs-bank">
+                Wells Fargo
+              </option>
+              <option value="citibank" data-icon="bx bxs-bank">Citibank</option>
+              <option value="us-bank" data-icon="bx bxs-bank">US Bank</option>
+              <option value="other">Other</option>
+            </select>
+            <span class="selected-icon"><i class="bx bxs-bank"></i></span>
+          </div>
+        </div>
+
+        <div class="transfer-note">
+          <div class="text">
+            <p style="font-weight: 900">Transfer Note (Optional)</p>
+            <p>
+              Please provide any additional information or instructions related
+              to the transfer
+            </p>
+          </div>
+          <div class="text-box">
+            <textarea name="notes" id=""></textarea>
+          </div>
+        </div>
+      </div>
+      <div class="payment-bank" style="margin-top: -20px">
+        <p style="font-weight: 900; color: black">Bank Account Details</p>
+        <span style="color: black"
+          >Enter the bank account details of the receipent</span
+        >
+      </div>
+      
+      {% if error %}
+      <p style="color: red">{{ error }}</p>
+      {% endif %} {% if success %}
+      <p style="color: green">{{ success }}</p>
+      {% endif %}
+
+      <form method="post">
+        {% csrf_token %}
+        <div class="input-box">
+          <label style="margin-left: -16px; margin-right: 18px" for="amount"
+            >Amount:</label
+          >
+          <input type="number" id="amount" name="amount" required /><br /><br />
+        </div>
+
+        <div class="input-box">
+          <label for="receiver_bank">Receiver's Bank:</label>
+          <input
+            type="text"
+            id="receiver_bank"
+            name="receiver_bank"
+            required
+          /><br /><br />
+        </div>
+
+        <div class="input-box">
+          <label for="receiver_account_number"
+            >Receiver's Account Number:</label
+          >
+          <input
+            type="text"
+            id="receiver_account_number"
+            name="receiver_account_number"
+            required
+          /><br /><br />
+        </div>
+
+        <div class="input-box">
+          <label for="receiver_name">Receiver's Name:</label>
+          <input
+            type="text"
+            id="receiver_name"
+            name="receiver_name"
+            required
+          /><br /><br />
+        </div>
+
+        <div class="input-box">
+          <label for="pin">PIN:</label>
+          <input
+            type="password"
+            id="pin"
+            name="pin"
+            maxlength="4"
+            required
+          /><br /><br />
+        </div>
+        <button type="submit">Transfer</button>
+      </form>
+    </div>
+    <script src="../static/script.js"></script>
+  </body>
+</html>

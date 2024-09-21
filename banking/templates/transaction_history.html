@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Transaction History - Sun Trust Bank</title>
+    <link
+      href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css"
+      rel="stylesheet"
+    />
+    <style>
+      body {
+        font-family: Helvetica, Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        color: #fff;
+        display: flex;
+        min-height: 100vh;
+      }
+      .sidebar {
+      width: 20%;
+      background: #292d36;
+      color: #fff;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      padding: 20px;
+      box-shadow: 2px 0 10px rgba(0, 0, 0, 0.2);
+      transition: all 0.3s ease;
+    }
+
+    .sidebar img {
+      max-width: 80%;
+      padding: 30px;
+      height: 40px;
+      }
+
+
+    .sidebar .top-section {
+      flex-grow: 1;
+    }
+
+    .sidebar .icon-box a {
+      display: flex;
+      align-items: center;
+      padding: 12px 0;
+      font-size: 1rem;
+      color: #fff;
+      text-decoration: none;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+      transition: all 0.3s ease;
+    }
+
+    .sidebar .icon-box a:hover {
+      color: rgba(139,110,202,255);
+      transform: translateX(10px);
+    }
+
+    .sidebar .icon-box a i {
+      margin-right: 10px;
+      font-size: 1.5rem;
+    }
+
+    .sidebar .sign-out {
+      background-color: rgba(139,110,202,255);
+      padding: 10px 20px;
+      text-align: center;
+      border-radius: 30px;
+      color: #fff;
+      text-decoration: none;
+      font-weight: bold;
+      transition: all 0.3s ease;
+    }
+
+    .sidebar .sign-out:hover {
+      background-color: rgba(139,110,202,255);
+      transform: scale(1.05);
+    }
+      .content {
+        flex: 1;
+        padding: 20px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        background-color: #ebebeb;
+        position: relative;
+        overflow-y: auto;
+
+      }
+      .card {
+        background-color: rgba(255, 255, 255, 0.1);
+        padding: 20px;
+        border-radius: 10px;
+        width: 100%;
+        max-width: 800px;
+        margin-bottom: 20px;
+        backdrop-filter: blur(5px);
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+      }
+      h1 {
+        font-size: 3rem;
+        color: #5b2a9b;
+        margin-bottom: 20px;
+        
+      }
+      p {
+        font-size: 1.2rem;
+        margin: 10px 0;
+      }
+      .transaction-table {
+  width: 100%;
+  margin-top: 20px;
+  border-collapse: separate;
+  border-spacing: 0 10px; 
+  color: #2d3748;
+  background-color: #fff;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+}
+
+.transaction-table th, .transaction-table td {
+  padding: 15px;
+  text-align: left;
+  border-bottom: 1px solid #e2e8f0;
+  background-color: #fff;
+}
+.transaction-table tr{
+  background: #292d36;
+
+}
+
+.transaction-table th {
+  font-size: 1.1rem;
+  color: #5b2a9b;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  background-color: #f7fafc;
+}
+
+.transaction-table td {
+  font-size: 1rem;
+  color: #4a5568;
+}
+
+.transaction-table tbody tr {
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.transaction-table tbody tr:hover {
+  transform: scale(1.02); 
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); 
+}
+
+.transaction-table tbody tr td {
+  border-bottom: none; 
+}
+
+.transaction-table tbody tr:first-child td {
+  border-top: 2px solid #e2e8f0;
+}
+
+.transaction-table tbody tr:last-child td {
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
+}
+
+      form {
+        width: 100%;
+        max-width: 600px;
+        margin: 0 auto;
+        padding: 20px;
+        background: rgba(255, 255, 255, 0.1);
+        border-radius: 10px;
+        backdrop-filter: blur(5px);
+      }
+      form label {
+        display: block;
+        margin-bottom: 10px;
+      }
+      form input,
+      form button {
+        width: 100%;
+        padding: 10px;
+        margin-bottom: 15px;
+        border-radius: 5px;
+        border: 1px solid #ccc;
+      }
+      form button {
+        background-color: #4158d0;
+        color: #fff;
+        border: none;
+        cursor: pointer;
+      }
+      form button:hover {
+        background-color: #c850c0;
+      }
+
+      header{
+  position: absolute;
+  top: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 50px;
+  padding: 10px 0 10px 10px;
+  min-width: 100%;
+  margin-bottom: 30px;
+  background: #292d36;
+display: none;
+}
+
+header img{
+  max-width: 80%;
+      padding: 30px;
+      height: 40px;
+}
+header .bx-menu{
+  font-size: 36px;
+  color: white;
+  top: 17px;
+  left: 30px;
+  position: absolute;
+}
+.close-btn{
+  display: none;
+}
+
+@media screen and (max-width: 850px) {
+        header {
+  display: flex;
+}
+
+.sidebar {
+  width: 0;
+  position: fixed;
+  top: 0;
+  left: -50px;
+  padding-left: 30px;
+  height: 100%;
+  background: #292d36;
+  color: #fff;
+  overflow-x: hidden;
+  z-index: 1000;
+  transition: width 0.3s ease;
+}
+
+.sidebar img {
+  max-width: 80%;
+  padding: 20px;
+  height: 40px;
+}
+
+/* Sidebar open state */
+.open-sidebar {
+  width: 100%;
+  margin-left: 30px;
+  margin-bottom: 10px;
+  /* Sidebar takes 100% of the screen width */
+}
+
+.close-btn {
+  position: absolute;
+  display: block;
+  top: 45px;
+  right: 40px;
+  background-color: transparent;
+  border: none;
+  font-size: 24px;
+  color: white;
+  cursor: pointer;
+}
+
+.sidebar .sign-out {
+    width: 360px;
+    margin-bottom: 25px;
+    align-self: center  ;
+
+  }
+  h1 {
+      margin-top: 80px;
+      }
+
+      .transaction-table {
+      border-radius: 10px;
+      max-width: 90%;
+      
+      }
+}
+
+@media screen and (max-width: 320px) {
+  header .bx-menu{
+    left: 10px;
+  }
+
+}
+@media screen and (max-width: 375px) {
+  header .bx-menu{
+    left: 15px;
+  }
+
+}
+@media screen and (max-width: 550px) {
+  header .bx-menu{
+    left: 15px;
+  }
+  table .transaction-table{
+      border-radius: 10px;
+      width: 200px;
+      
+      }
+
+}
+@media screen and (max-width: 1024px) {
+  body{
+    max-height: 100vh;
+  }
+  .sidebar img{
+    max-width: 100%;
+    margin-left: -30px;
+  }
+  body{
+    overflow: hidden;
+
+  }
+
+}
+
+
+      
+    </style>
+  </head>
+  <body>
+    <div class="sidebar">
+      <div class="top-section">
+        <img
+            src="../static/sun-trust-bank-high-resolution-logo-transparent.png"
+            alt="Sun trust Bank Logo"
+          />
+        <div class="icon-box">
+          <a href="{% url 'dashboard' %}">
+            <i class="bx bxs-dashboard"></i> Dashboard
+          </a>
+          <a href="{% url 'transfer_funds' %}">
+            <i class="bx bx-transfer"></i> Transfer Funds
+          </a>
+          <a href="{% url 'transaction_history' %}">
+            <i class="bx bx-history"></i> Transaction History
+          </a>
+          <a href="{% url 'customer_support' %}">
+            <i class="bx bx-support"></i> Customer Support
+          </a>
+        </div>
+      </div>
+      <a href="{% url 'logout' %}" class="sign-out"
+        ><i class="bx bx-exit"></i>Sign Out</a
+      >
+    </div>
+   
+    <div class="content">
+      <header>
+        <i class='bx bx-menu' id="menu-toggle"></i>
+        <img
+          src="../static/sun-trust-bank-high-resolution-logo-transparent.png"
+          alt="Sun trust Bank Logo"
+        />
+      </header>
+      <h1>Transaction History</h1>
+      <table class="transaction-table">
+        <thead>
+          <tr>
+            <th>Date</th>
+            <th>Description</th>
+            <th>Amount</th>
+            <th>Reference ID</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for transaction in transactions %}
+          <tr>
+            <td>{{ transaction.date }}</td>
+            <td>{{ transaction.description }}</td>
+            <td>${{ transaction.amount }}</td>
+            <td>{{ transaction.reference_id }}</td>
+          </tr>
+          {% empty %}
+          <tr>
+            <td colspan="4">No transactions found.</td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+    
+    <script src="../static/script.js"></script>
+  </body>
+</html>

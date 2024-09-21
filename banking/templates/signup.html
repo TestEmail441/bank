@@ -1,0 +1,381 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Banking App Interface</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        background-color: #e6e6e6;
+        margin: 0;
+        padding: 0;
+      }
+
+      .container {
+        display: flex;
+        min-height: 100vh;
+      }
+
+      .rightPanel {
+        width: 45%;
+        padding: 10px;
+        display: flex;
+        justify-content: center;
+      }
+
+      .signup-form-container {
+        display: flex;
+        flex-grow: 1;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        padding: 0 24px;
+      }
+
+      .formBox {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+        min-width: 55%;
+        max-width: 80%;
+      }
+
+      h2 {
+        text-align: center;
+        color: rgba(139, 110, 202, 255);
+        margin-bottom: 20px;
+      }
+
+      .form-group {
+        margin-bottom: 15px;
+      }
+      .form-group .input-box{
+        display: flex;
+        color: #757575;
+        width: 100%;
+        height: fit-content;
+        position: relative;
+        font-size: 1rem;
+        min-width: 100px;
+        border-radius: 4px;
+      }
+
+      input {
+        color: #333232;
+        display: block;
+        border-radius: 10px;
+        padding: 15px;
+        font-weight: 700;
+        font-size: 1.3rem;
+        border: 2px solid transparent;
+        margin: 0;
+        transition: border-color 0.3s ease;
+        width: 100%;
+      }
+      input:focus {
+        outline: none;
+        border-color: #8b6eca;
+      }
+      label {
+        color: #333232;
+        font-weight: 500;
+        width: 100%;
+        display: flex;
+        position: relative;
+        font-size: 1.3rem;
+        align-items: center;
+        margin-bottom: 8px;
+        justify-content: space-between;
+        letter-spacing: 0.2px;
+      }
+
+      button {
+        background-color: rgba(139, 110, 202, 255);
+        color: white;
+        padding: 16px;
+        border-radius: 4px;
+        width: 100%;
+        cursor: pointer;
+        margin-top: 10px;
+      }
+
+
+      .illustration-section {
+        width: 55%;
+        position: relative;
+        overflow: hidden;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .slide-container {
+        display: flex;
+        width: 300%;
+        transition: transform 1s ease-in-out;
+      }
+
+      .slide {
+        width: 100%;
+        flex-shrink: 0;
+        position: relative;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .slide:nth-child(1) {
+        background-image: url("{% static 'accounts/images/illustration.jpg' %}");
+        min-height: 100vh;
+        background-size: contain;
+        background-position: center;
+      
+      }
+
+      .slide:nth-child(2) {
+        background-image: url("{% static 'accounts/images/illustration22.jpg' %}");
+        min-height: 100vh;
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+        
+      }
+
+      .slide:nth-child(3) {
+        background-image: url("{% static 'accounts/images/slidePic4.jpg' %}");
+        min-height: 100vh;
+        background-size: cover;
+        background-position: center;
+        display: flex;
+        background-repeat: no-repeat;
+        background-size: cover;
+        background-position: center;
+      }
+
+      .slide-text {
+        color: rgb(230, 225, 225);
+        position: absolute;
+        align-items: self-start;
+        bottom: 30px;
+        padding: 20px;
+        left: 0;
+        font-size: 1.6rem;
+        text-align: left;
+        max-width: 60%;
+      }
+
+      .slide-text h2 {
+        color: white;
+        font-size: 1.8rem;
+        margin-bottom: 10px;
+        font-weight: bold;
+        text-align: left;
+      }
+
+      .slide-text p {
+        font-size: 1rem;
+        font-weight: 700;
+        color: white;
+      }
+
+      .navigation-dots {
+        position: absolute;
+        bottom: 20px;
+        left: 20px;
+        width: 100%;
+        display: flex;
+        gap: 10px;
+      }
+
+      .nav-dot {
+        background-color: rgba(255, 255, 255, 0.5);
+        width: 10px;
+        height: 10px;
+        border-radius: 50%;
+        cursor: pointer;
+      }
+
+      .nav-dot.active {
+        background-color: rgba(139, 110, 202, 255);
+      }
+
+      .signIn {
+        display: flex;
+        width: 100%;
+        gap: 4px;
+        align-items: center;
+        justify-content: center;
+        letter-spacing: 0.2px;
+      }
+      @media (max-width: 767px) {
+        .illustration-section {
+          display: none !important;
+        }
+
+        .rightPanel {
+          width: 100% !important;
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="container">
+      <div class="illustration-section">
+        <div class="slide-container">
+          <div class="slide">
+            <div class="slide-text">
+              <h2>Say No to Stress with Zealous Bank</h2>
+              <p style="color: white">
+                Experience hassle-free banking with our user-friendly interface
+                and top-notch customer service.
+              </p>
+            </div>
+          </div>
+          <div class="slide">
+            <div class="slide-text">
+              <h2>Secure Your Finances</h2>
+              <p>
+                Your security is our priority. Enjoy safe and secure
+                transactions with state-of-the-art encryption.
+              </p>
+            </div>
+          </div>
+          <div class="slide">
+            <div class="slide-text">
+              <h2>Fast, Reliable, and Convenient</h2>
+              <p>
+                Manage your accounts on the go with our fast, reliable, and
+                convenient banking solutions.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <div class="navigation-dots">
+          <div class="nav-dot" data-slide="0"></div>
+          <div class="nav-dot" data-slide="1"></div>
+          <div class="nav-dot" data-slide="2"></div>
+        </div>
+      </div>
+      <div class="rightPanel">
+        <div class="signup-form-container">
+          <div class="formBox">
+            <img 
+            height="50px"
+            width="100%"
+            src="../static/sunTrustBank.png" alt="">
+              <h2 style="font-size: 2rem; color: black; text-align: left">
+              Sign Up
+            </h2>
+            {% if form.errors %}
+            <div style="color: red; font-weight: bold; margin-bottom: 10px;">
+              <p>There was a problem with your submission:</p>
+              <ul>
+                {% for field in form %}
+                  {% if field.errors %}
+                    <li>{{ field.label }}: {{ field.errors|striptags }}</li>
+                  {% endif %}
+                {% endfor %}
+              </ul>
+            </div>
+          {% endif %}
+            <form method="post">
+              {% csrf_token %}
+              <div class="form-group">
+                <label for="username">Username</label>
+                <div class="input-box">
+                  <input
+                    type="text"
+                    id="username"
+                    name="username"
+                    class="form-control"
+                    required
+                  />
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="email">Email</label>
+                <div class="input-box">
+                  <input
+                    type="email"
+                    id="email"
+                    name="email"
+                    class="form-control"
+                    required
+                  />
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="password1">Password</label>
+                <div class="input-box">
+                  <input
+                    type="password"
+                    id="password1"
+                    name="password1"
+                    class="form-control"
+                    required
+                  />
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="password2">Confirm Password</label>
+                <div class="input-box">
+                  <input
+                    type="password"
+                    id="password2"
+                    name="password2"
+                    class="form-control"
+                    required
+                  />
+                </div>
+              </div>
+              
+              <button type="submit">Sign Up</button>
+            </form>
+            <div class="signIn">
+              <p style="color: #4d4d4d">
+                Already have an account?
+                <a
+                  href="{% url 'login' %}"
+                  style="
+                    font-weight: bold;
+                    color: rgba(139, 110, 202, 255);
+                    font-size: 1rem;
+                  "
+                  >Sign In</a
+                >
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      const dots = document.querySelectorAll(".nav-dot");
+      const slideContainer = document.querySelector(".slide-container");
+
+      dots.forEach((dot, index) => {
+        dot.addEventListener("click", () => {
+          slideContainer.style.transform = `translateX(-${index * 100}%)`;
+          dots.forEach((dot) => dot.classList.remove("active"));
+          dot.classList.add("active");
+        });
+      });
+
+      let currentIndex = 0;
+
+      function autoSlide() {
+        currentIndex = (currentIndex + 1) % dots.length;
+        slideContainer.style.transform = `translateX(-${currentIndex * 100}%)`;
+        dots.forEach((dot) => dot.classList.remove("active"));
+        dots[currentIndex].classList.add("active");
+      }
+
+      setInterval(autoSlide, 4000);
+    </script>
+  </body>
+</html>

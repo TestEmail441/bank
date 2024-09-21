@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home - Sun Trust Bank</title>
+    <style>
+ body {
+            font-family: Helvetica, Arial, sans-serif;
+            background: #4158D0; 
+            background-image: linear-gradient(43deg, #4158D0 0%, #C850C0 46%, #FFCC70 100%);
+            margin: 0;
+            padding: 0;
+            color: #fff;
+            display: flex;
+            min-height: 100vh;
+        }
+        .sidebar {
+            width: 250px;
+            background-color: rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(10px);
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            height: 100vh;
+            box-shadow: 2px 0 5px rgba(0, 0, 0, 0.3);
+        }
+        .sidebar a {
+            color: #fff;
+            text-decoration: none;
+            padding: 15px 0;
+            display: block;
+            transition: background-color 0.3s ease;
+        }
+        .sidebar a:hover {
+            background-color: rgba(255, 255, 255, 0.3);
+        }
+        .content {
+            flex: 1;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .card {
+            background-color: rgba(255, 255, 255, 0.1);
+            padding: 20px;
+            border-radius: 10px;
+            width: 100%;
+            max-width: 800px;
+            margin-bottom: 20px;
+            backdrop-filter: blur(5px);
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+        }
+        h1 {
+            font-size: 2rem;
+            margin-bottom: 20px;
+        }
+        p {
+            font-size: 1.2rem;
+            margin: 10px 0;
+        }
+        .transaction-table {
+            width: 100%;
+            margin-top: 20px;
+            border-collapse: collapse;
+        }
+        .transaction-table th, .transaction-table td {
+            padding: 10px;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            text-align: left;
+        }
+        .transaction-table th {
+            background-color: rgba(255, 255, 255, 0.2);
+        }
+        form {
+            width: 100%;
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            backdrop-filter: blur(5px);
+        }
+        form label {
+            display: block;
+            margin-bottom: 10px;
+        }
+        form input, form button {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+        form button {
+            background-color: #4158D0;
+            color: #fff;
+            border: none;
+            cursor: pointer;
+        }
+        form button:hover {
+            background-color: #C850C0;
+        }    </style>
+</head>
+<body>
+    <div class="sidebar">
+        <div>
+            <a href="{% url 'dashboard' %}">Dashboard</a>
+            <a href="{% url 'transfer_funds' %}">Transfer Funds</a>
+            <a href="{% url 'transaction_history' %}">Transaction History</a>
+            <a href="{% url 'customer_support' %}">Customer Support</a>
+        </div>
+        <a href="{% url 'logout' %}">Sign Out</a>
+    </div>
+    <div class="content">
+        <h1>Welcome to Zealous Bank</h1>
+        <p><a href="{% url 'login' %}">Login</a> or <a href="{% url 'signup' %}">Sign Up</a></p>
+    </div>
+</body>
+</html>

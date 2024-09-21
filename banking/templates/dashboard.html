@@ -1,0 +1,798 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Dashboard - Sun Trust Bank</title>
+    <!-- Google Fonts -->
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css"
+      rel="stylesheet"
+    />
+    <!-- Font Awesome CDN -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+      integrity="sha384-B0vP5xmATw1+K9KRQjQerjvTumT1A8gOgQz1R8fYnh9MZzTq6fSKaNtZ5+5hb7ie"
+      crossorigin="anonymous"
+    />
+    <!-- Custom CSS -->
+    <style>
+      body {
+        font-family: "Roboto", Arial, sans-serif;
+        color: #333;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        min-height: 100vh;
+        background-color: #ebebeb;
+        
+      }
+
+      .main-container {
+        display: flex;
+        width: 100%;
+        margin: 0;
+        overflow: hidden;
+
+      }
+
+      /* General Sidebar Styling */
+      .sidebar {
+        width: 20%;
+        background: #292d36;
+        color: #fff;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        padding: 20px;
+        box-shadow: 2px 0 10px rgba(0, 0, 0, 0.2);
+        transition: all 0.3s ease;
+        max-height: 100vh;
+        position: relative;
+      }
+
+      .sidebar img {
+      max-width: 80%;
+      padding: 30px;
+      height: 40px;
+      }
+
+
+      .sidebar .icon-box a {
+        display: flex;
+        align-items: center;
+        padding: 12px 0;
+        font-size: 1rem;
+        color: #fff;
+        text-decoration: none;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        transition: all 0.3s ease;
+      }
+
+      .sidebar .icon-box a:hover {
+        color: rgba(139, 110, 202, 255);
+        transform: translateX(10px);
+      }
+
+      .sidebar .icon-box a i {
+        margin-right: 10px;
+        font-size: 1.5rem;
+      }
+
+      .sidebar .sign-out {
+        background-color: rgba(139, 110, 202, 255);
+        padding: 10px 20px;
+        text-align: center;
+        border-radius: 30px;
+        color: #fff;
+        text-decoration: none;
+        font-weight: bold;
+        transition: all 0.3s ease;
+      }
+
+      .sidebar .sign-out:hover {
+        background-color: rgba(139, 110, 202, 255);
+        transform: scale(1.05);
+      }
+
+      .content {
+        flex: 1;
+        max-width: 70%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 20px;
+        gap: 20px;
+        border-radius: 3px;
+        margin: 0 auto;
+       position: relative;
+       overflow-y: auto; /* Allows scrolling within the content area */
+      }
+
+      .row {
+        display: flex;
+        flex: 1;
+        width: 100%;
+      }
+
+      .box1,
+      .box2,
+      .box3,
+      .box4,
+      .box5 {
+        flex: 1;
+        background-color: #fff;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 24px;
+        border-radius: 10px;
+      }
+
+      .box1{
+        max-width: 40%;
+      }
+      .box2 {
+        background: none;
+        max-width: 70%;
+      }
+
+      .box4 {
+        display: flex;
+        flex-direction: column;
+        max-width: 50%;
+        background-color: #fff;
+      }
+      .box4 h4 {
+        width: 90%;
+        text-align: left;
+        margin-bottom: -20px;
+      }
+      .box4 .account-number {
+        display: flex;
+        flex-direction: column;
+        width: 90%;
+        align-items: flex-start;
+        margin-top: 20px;
+      }
+      .box4 .account-number h5 {
+        color: #9f9f9f;
+        font-size: 1rem;
+        margin-bottom: 10px;
+        margin-top: 20px;
+      }
+      .box4 .account-number span {
+        letter-spacing: 1px;
+        font-size: 1.5rem;
+        font-weight: 700;
+        margin-bottom: 15px;
+      }
+      .box4 .account-grid {
+        display: grid;
+        width: 90%;
+        grid-template-columns: repeat(2, 1fr);
+        grid-template-rows: repeat(2, 1fr);
+        gap: 20px;
+      }
+      .box4 .account-grid .grid-box {
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        border-radius: 5px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        padding-left: 10px;
+        padding-bottom: 20px;
+        height: 100px;
+        max-width: 85%;
+      }
+      .box4 .account-grid .grid-box1 {
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        border-radius: 5px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        padding-left: 10px;
+        padding-bottom: 20px;
+        background-color: rgba(139, 110, 202, 255);
+        height: 100px;
+        color: white;
+        max-width: 85%;
+
+      }
+      .box4 .account-grid .grid-box h5,
+      .box4 .account-grid .grid-box1 h5 {
+        margin-bottom: 10px;
+      }
+      .top-row {
+        flex: 0.4;
+      }
+
+      .bottom-row {
+        flex: 0.6;
+      }
+     /* Default styles */
+.card {
+  min-width: 80%;
+  max-width: 80%;
+  height: 100%;
+  position: relative;
+  background-image: linear-gradient(
+    43deg,
+    #4158d0 0%,
+    #c850c0 46%,
+    #ffcc70 100%
+  );
+  border-top: 1px solid #eeeded70;
+  border-left: 1px solid #eeeded70;
+  border-radius: 30px;
+  backdrop-filter: blur(30px);
+  box-shadow: 0 15px 25px rgba(0, 0, 0, 0.3);
+  z-index: 1;
+  padding: 20px;
+  box-sizing: border-box;
+}
+
+.bank {
+  color: #ffffff;
+  font-size: 28px;
+  font-family: "Mulish", sans-serif;
+  position: absolute;
+  top: 20px;
+  right: 20px;
+}
+
+.chip {
+  width: 50px;
+  position: absolute;
+  top: 70px;
+  left: 20px;
+}
+
+.indicator {
+  width: 50px;
+  position: absolute;
+  top: 70px;
+  left: 90px;
+}
+
+.number {
+  color: #ffffff;
+  font-size: 36px;
+  font-family: "ocr extended";
+  font-weight: 400;
+  position: absolute;
+  bottom: 80px;
+  left: 20px;
+}
+
+.card-holder {
+  color: #ffffff;
+  font-size: 14px;
+  font-family: cursive;
+  font-weight: 700;
+  position: absolute;
+  bottom: 30px;
+  left: 20px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.card-holder span {
+  font-size: 10px;
+  font-family: "Mulish", sans-serif;
+  font-weight: 400;
+}
+
+.valid {
+  color: #ffffff;
+  font-size: 18px;
+  font-family: "ocr extended";
+  font-weight: 400;
+  position: absolute;
+  bottom: 23px;
+  left: 200px;
+  text-transform: uppercase;
+}
+
+.valid span {
+  font-size: 10px;
+  font-family: "Mulish", sans-serif;
+  font-weight: 400;
+}
+
+.logo {
+  width: 70px;
+  position: absolute;
+  right: 20px;
+  bottom: 30px;
+}
+
+
+      /* User Details */
+      .user-details {
+        width: 100%;
+        color: #333;
+        display: flex;
+        flex-direction: column;
+        padding: 5px;
+        margin-left: 20px;
+      }
+
+      .user-details h3 {
+        font-size: 1.5rem;
+        color: #5b2a9b;
+        letter-spacing: 0.5px;
+      }
+
+      /* Credit Card */
+      .credit-card {
+        background: linear-gradient(135deg, #5b2a9b, #c77dff);
+        padding: 20px;
+        border-radius: 10px;
+        color: #fff;
+        font-size: 1.2rem;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        min-width: 30%;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        height: 100%;
+      }
+
+      .credit-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+      }
+
+      .credit-card .bank-name {
+        font-size: 1.8rem;
+        font-weight: 700;
+        margin-bottom: 15px;
+      }
+
+      .credit-card .account-number {
+        letter-spacing: 3px;
+        font-size: 2rem;
+        margin-bottom: 10px;
+      }
+
+      .credit-card .card-holder {
+        font-size: 1.3rem;
+      }
+
+      /* Transaction Card */
+      .transaction-card {
+        width: 100%;
+        padding: 30px;
+        border-radius: 10px;
+        max-width: 100%;
+        text-align: center;
+        max-height: 100%;
+      }
+
+      .transaction-card h1 {
+        font-size: 1.8rem;
+        margin-bottom: 20px;
+        color: #5b2a9b;
+        text-align: left;
+      }
+
+      /* Transaction Table */
+      .transaction-table {
+        width: 100%;
+        margin-top: 20px;
+        color: #4a5568;
+      }
+
+      .transaction-table th,
+      .transaction-table td {
+        padding: 12px;
+        border: 1px solid #e2e8f0;
+        text-align: left;
+      }
+
+      .transaction-table th {
+        background-color: #f7fafc;
+        font-size: 1.1rem;
+        color: #5b2a9b;
+      }
+
+      .transaction-table td {
+        font-size: 1rem;
+      }
+      .account-balance {
+        display: flex;
+        justify-content: start;
+        align-items: center;
+        gap: 35px;
+        padding: 20px 15px;
+        background-color: rgba(128, 128, 128, 0.167);
+        width: 50%;
+        border-radius: 25px;
+      }
+      .bx-wallet {
+        font-size: 1.2em;
+        color: white;
+        padding: 15px;
+        background-color: #5b2a9b;
+        border-radius: 50%;
+      }
+      .total-balance {
+        display: flex;
+        flex-direction: column-reverse;
+        justify-content: start;
+        gap: 10px;
+      }
+      .total-balance .total {
+        color: gray;
+        font-size: small;
+      }
+      .total-balance span {
+        color: #5b2a9b;
+      }
+
+header{
+  position: absolute;
+  top: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 50px;
+  padding: 10px 0 10px 10px;
+  min-width: 100%;
+  margin-bottom: 30px;
+  background: #292d36;
+display: none;
+}
+
+header img{
+  max-width: 80%;
+      padding: 30px;
+      height: 40px;
+}
+header .bx-menu{
+  font-size: 36px;
+  color: white;
+  top: 17px;
+  left: 30px;
+  position: absolute;
+}
+.close-btn{
+  display: none;
+}
+@media screen and (max-width: 320px) {
+  header .bx-menu{
+    left: 10px;
+  }
+
+}
+@media screen and (max-width: 375px) {
+  header .bx-menu{
+    left: 15px;
+  }
+
+}
+@media screen and (max-width: 550px) {
+  header .bx-menu{
+    left: 15px;
+  }
+
+}
+      @media screen and (max-width: 850px) {
+        header {
+  display: flex;
+}
+
+.sidebar {
+  width: 0;
+  position: fixed;
+  top: 0;
+  left: -50px;
+  padding-left: 30px;
+  height: 100%;
+  background: #292d36;
+  color: #fff;
+  overflow-x: hidden;
+  z-index: 1000;
+
+  transition: width 0.3s ease;
+}
+
+.sidebar img {
+  max-width: 80%;
+  padding: 20px;
+  height: 40px;
+  margin-left: 15px;
+}
+
+/* Sidebar open state */
+.open-sidebar {
+  width: 100%;
+  margin-left: 30px;
+  margin-bottom: 10px;
+  /* Sidebar takes 100% of the screen width */
+}
+
+.close-btn {
+  position: absolute;
+  display: block;
+  top: 45px;
+  right: 40px;
+  background-color: transparent;
+  border: none;
+  font-size: 24px;
+  color: white;
+  cursor: pointer;
+}
+
+  .box1{
+    margin-top: 80px;
+  }
+  .box5{
+    margin-top: 20px;
+    margin-bottom: 20px;
+  }
+
+  .content {
+    width: 100%;
+    max-width: 100%;
+  }
+  .card{
+    display: none;
+  }
+  .box4, .box1{
+    max-width: 100%;
+  }
+  .row{
+    display: flex;
+    flex-direction: column;
+  }
+  .account-balance{
+    width: 100%;
+    padding: auto;
+    margin-left: -20px;
+    background: #FFFFFF;
+
+  }
+  .user-details{
+    display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        max-width: 100%;
+  }
+  .account-grid{
+    margin-bottom: 20px;
+  }
+  .sidebar .sign-out {
+    width: 360px;
+    margin-bottom: 25px;
+    align-self: center  ;
+
+  }
+}
+
+
+@media screen and (max-width: 1024px) {
+  body{
+    max-height: 100vh;
+  }
+  .sidebar img{
+    max-width: 100%;
+    margin-left: -30px;
+  }
+  .account-balance{
+    width: 90%;
+    margin-left: -15px;
+  }
+
+  .box4 .account-grid{
+    gap: 5px;
+
+  }
+
+  .bank {
+  color: #ffffff;
+  font-size: 28px;
+  font-family: "Mulish", sans-serif;
+  position: absolute;
+  top: 0;
+  right: 20px;
+}
+
+.chip {
+  width: 50px;
+  position: absolute;
+  top: 30px;
+  left: 20px;
+}
+
+.indicator {
+  width: 50px;
+  position: absolute;
+  top: 30px;
+  left: 90px;
+  font-size: 12px;
+}
+
+.number {
+  color: #ffffff;
+  font-size: 30px;
+  font-family: "ocr extended";
+  font-weight: 400;
+  position: absolute;
+  bottom: 60px;
+  left: 20px;
+}
+
+.card-holder {
+  color: #ffffff;
+  font-size: 14px;
+  font-family: cursive;
+  font-weight: 700;
+  position: absolute;
+  bottom: 20px;
+  left: 20px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.card-holder span {
+  font-size: 10px;
+  font-family: "Mulish", sans-serif;
+  font-weight: 400;
+}
+
+.valid {
+  color: #ffffff;
+  font-size: 18px;
+  font-family: "ocr extended";
+  font-weight: 400;
+  position: absolute;
+  bottom: 13px;
+  left: 150px;
+  text-transform: uppercase;
+}
+
+.valid span {
+  font-size: 10px;
+  font-family: "Mulish", sans-serif;
+  font-weight: 400;
+}
+
+.logo {
+  width: 70px;
+  position: absolute;
+  right: 20px;
+  bottom: 10px;
+}
+
+
+}
+
+    </style>
+  </head>
+  <body>
+    <div class="main-container">
+      <div class="sidebar">
+        <div class="top-section">
+          <img
+            src="../static/sun-trust-bank-high-resolution-logo-transparent.png"
+            alt="Sun trust Bank Logo"
+          />
+          <div class="icon-box">
+            <a href="{% url 'dashboard' %}">
+              <i class="bx bxs-dashboard"></i> Dashboard
+            </a>
+            <a href="{% url 'transfer_funds' %}">
+              <i class="bx bx-transfer"></i> Transfer Funds
+            </a>
+            <a href="{% url 'transaction_history' %}">
+              <i class="bx bx-history"></i> Transaction History
+            </a>
+            <a href="{% url 'customer_support' %}">
+              <i class="bx bx-support"></i> Customer Support
+            </a>
+          </div>
+        </div>
+        <a href="{% url 'logout' %}" class="sign-out"
+          ><i style="margin-right: 5px" class="bx bx-exit"></i>Sign Out</a
+        >
+      </div>
+
+      <div class="content">
+        <header>
+          <i class='bx bx-menu' id="menu-toggle"></i>
+          <img
+            src="../static/sun-trust-bank-high-resolution-logo-transparent.png"
+            alt="Sun trust Bank Logo"
+          />
+        </header>
+        <div class="row top-row">
+          <div class="box1">
+            <div class="user-details">
+              <h3>Welcome Back, {{ account.user.username }}!</h3>
+              <div class="account-balance">
+                <i class="bx bx-wallet"></i>
+                <div class="total-balance">
+                  <span class="total">Total Balance</span>
+                  <span>${{ account.balance }}</span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="box2">
+            <div class="card">
+              <h3 class="bank">bank</h3>
+              <img src="../static/accounts/chip.png" class="chip" />
+              <img
+                src="../static/accounts/contactless-indicator.png"
+                class="indicator"
+              />
+              <h3 class="number">4100 1234 5678 9010</h3>
+              <h5 class="card-holder">
+                <span>card holder</span><br />
+                {{ account.user.username }}
+              </h5>
+              <h5 class="valid"><span>expiry date</span><br />20/30</h5>
+              <img src="../static/accounts/visa.png" class="logo" />
+            </div>
+          </div>
+        </div>
+        <div class="row bottom-row">
+          <div class="box4">
+            <h4>Account Details</h4>
+            <div class="account-number">
+              <h5>Account Number</h5>
+              <span> {{ account.account_number }}</span>
+            </div>
+            <div class="account-grid">
+              <div class="grid-box1">
+                <h5>Currency</h5>
+                <span>$</span>
+              </div>
+              <div class="grid-box">
+                <h5>Account Type</h5>
+                <span>Current</span>
+              </div>
+              <div class="grid-box">
+                <h5>Status</h5>
+                <span>ACTIVE</span>
+              </div>
+              <div class="grid-box">
+                <h5>Account Limit</h5>
+                <span>$100,000</span>
+              </div>
+            </div>
+          </div>
+          <div class="box5">
+            <div class="transaction-card">
+              <h1>Transaction History</h1>
+              <table class="transaction-table">
+                <tr>
+                  <th>Date</th>
+                  <th>Amount</th>
+                </tr>
+                {% for transaction in transactions %}
+                <tr>
+                  <td>{{ transaction.date }}</td>
+                  <td>${{ transaction.amount }}</td>
+                </tr>
+                {% empty %}
+                <tr>
+                  <td colspan="3">No transactions available</td>
+                </tr>
+                {% endfor %}
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script src="../static/script.js"></script>
+  </body>
+</html>

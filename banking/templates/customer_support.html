@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Customer Support - Sun Trust Bank</title>
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <style>
+        body {
+            font-family: Helvetica, Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            color: #fff;
+            display: flex;
+            background-color: rgb(139,110,202,255);
+            min-height: 100vh;
+        }
+
+        .sidebar {
+            width: 20%;
+            background: #292d36;
+            color: #fff;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            padding: 20px;
+            box-shadow: 2px 0 10px rgba(0, 0, 0, 0.2);
+            transition: all 0.3s ease;
+        }
+
+        .sidebar img {
+      max-width: 80%;
+      padding: 30px;
+      height: 40px;
+      }
+
+
+        .sidebar .top-section {
+            flex-grow: 1;
+        }
+
+        .sidebar .icon-box a {
+            display: flex;
+            align-items: center;
+            padding: 12px 0;
+            font-size: 1rem;
+            color: #fff;
+            text-decoration: none;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .sidebar .icon-box a:hover {
+            color: rgba(139,110,202,255);
+            transform: translateX(10px);
+        }
+
+        .sidebar .icon-box a i {
+            margin-right: 10px;
+            font-size: 1.5rem;
+        }
+
+        .sidebar .sign-out {
+            background-color: rgba(139,110,202,255);
+            padding: 10px 20px;
+            text-align: center;
+            border-radius: 30px;
+            color: #fff;
+            text-decoration: none;
+            font-weight: bold;
+            transition: all 0.3s ease;
+        }
+
+        .sidebar .sign-out:hover {
+            background-color: rgba(139,110,202,255);
+            transform: scale(1.05);
+        }
+
+        .content {
+            flex: 1;
+            padding: 40px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            background-color: rgb(139,110,202,255)
+        }
+
+        .content h1 {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            text-align: center;
+            color: #fff;
+        }
+
+        .content p {
+            font-size: 1.2rem;
+            margin-bottom: 20px;
+            text-align: center;
+            color: #fff;
+        }
+
+        .content ul {
+            list-style: none;
+            padding: 0;
+            font-size: 1.1rem;
+            text-align: center;
+            line-height: 2;
+        }
+
+        .content ul li {
+            margin-bottom: 10px;
+        }
+
+        .content ul li a {
+            color: #FFCC70;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .content ul li a:hover {
+            color: #fff;
+        }
+
+        .card {
+            background-color: rgba(255, 255, 255, 0.1);
+            padding: 20px;
+            border-radius: 10px;
+            width: 100%;
+            max-width: 800px;
+            margin-bottom: 20px;
+            backdrop-filter: blur(5px);
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+        }
+
+        form {
+            width: 100%;
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            backdrop-filter: blur(5px);
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+        }
+
+        form label {
+            display: block;
+            margin-bottom: 10px;
+            color: #fff;
+        }
+
+        form input, form button {
+            width: 100%;
+            padding: 12px;
+            margin-bottom: 15px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+
+        form input {
+            background-color: rgba(255, 255, 255, 0.2);
+            color: #fff;
+        }
+
+        form button {
+            background-color: #4158D0;
+            color: #fff;
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        form button:hover {
+            background-color: #C850C0;
+        }
+
+        header{
+  position: absolute;
+  top: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 50px;
+  padding: 10px 0 10px 10px;
+  min-width: 100%;
+  margin-bottom: 30px;
+  background: #292d36;
+display: none;
+}
+
+header img{
+  max-width: 80%;
+      padding: 30px;
+      height: 40px;
+}
+header .bx-menu{
+  font-size: 36px;
+  color: white;
+  top: 17px;
+  left: 30px;
+  position: absolute;
+}
+.close-btn{
+  display: none;
+}
+
+ @media screen and (max-width: 850px) {
+header {
+  display: flex;
+}
+
+.sidebar {
+  width: 0;
+  position: fixed;
+  top: 0;
+  left: -50px;
+  padding-left: 30px;
+  height: 100%;
+  background: #292d36;
+  color: #fff;
+  overflow-x: hidden;
+  z-index: 1000;
+  transition: width 0.3s ease;
+}
+
+.sidebar img {
+  max-width: 80%;
+  padding: 20px;
+  height: 40px;
+}
+
+/* Sidebar open state */
+.open-sidebar {
+  width: 100%;
+  margin-left: 30px;
+  margin-bottom: 10px;
+  /* Sidebar takes 100% of the screen width */
+}
+
+.close-btn {
+  position: absolute;
+  display: block;
+  top: 45px;
+  right: 40px;
+  background-color: transparent;
+  border: none;
+  font-size: 24px;
+  color: white;
+  cursor: pointer;
+}
+
+.sidebar .sign-out {
+    width: 360px;
+    margin-bottom: 25px;
+    align-self: center  ;
+
+  }
+  h1 {
+      margin-top: 80px;
+      }
+
+      .transaction-table {
+      border-radius: 10px;
+      
+      }
+}
+
+@media screen and (max-width: 320px) {
+  header .bx-menu{
+    left: 10px;
+  }
+
+}
+@media screen and (max-width: 375px) {
+  header .bx-menu{
+    left: 15px;
+  }
+
+}
+@media screen and (max-width: 550px) {
+  header .bx-menu{
+    left: 15px;
+  }
+
+}
+@media screen and (max-width: 1024px) {
+  body{
+    max-height: 100vh;
+  }
+  .sidebar img{
+    max-width: 100%;
+    margin-left: -30px;
+  }
+
+}
+
+
+    </style>
+</head>
+<body>
+    <div class="sidebar">
+        <div class="top-section">
+            <img
+            src="../static/sun-trust-bank-high-resolution-logo-transparent.png"
+            alt="Sun trust Bank Logo"
+          />            <div class="icon-box">
+                <a href="{% url 'dashboard' %}">
+                    <i class='bx bxs-dashboard'></i> Dashboard
+                </a>
+                <a href="{% url 'transfer_funds' %}">
+                    <i class='bx bx-transfer'></i> Transfer Funds
+                </a>
+                <a href="{% url 'transaction_history' %}">
+                    <i class='bx bx-history'></i> Transaction History
+                </a>
+                <a href="{% url 'customer_support' %}">
+                    <i class='bx bx-support'></i> Customer Support
+                </a>
+            </div>
+        </div>
+        <a href="{% url 'logout' %}" class="sign-out"><i class='bx bx-exit'></i> Sign Out</a>
+    </div>
+
+    <div class="content">
+        <header>
+            <i class='bx bx-menu' id="menu-toggle"></i>
+            <img
+              src="../static/sun-trust-bank-high-resolution-logo-transparent.png"
+              alt="Sun trust Bank Logo"
+            />
+          </header>
+        <h1>Customer Support</h1>
+        <p>If you need assistance, please contact us:</p>
+        <ul>
+            <li>Email: {{ support_email }}</li>
+            <li>Phone: {{ support_phone }}</li>
+            <li>Business Hours: {{ support_hours }}</li>
+        </ul>
+    </div>
+
+    <script src="../static/script.js"></script>
+</body>
+</html>

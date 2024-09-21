@@ -1,0 +1,440 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Banking App Interface</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        background-color: #e6e6e6;
+        margin: 0;
+        padding: 0;
+      }
+
+      .container {
+        display: flex;
+        min-height: 100vh;
+      }
+
+      .rightPanel {
+        width: 45%;
+        padding: 10px;
+        display: flex;
+        justify-content: center;
+      }
+
+      .rightPanel .details {
+        display: flex;
+        flex-grow: 1;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        padding: 0 24px;
+      }
+
+      .formBox {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+        min-width: 55%;
+        max-width: 55%;
+      }
+
+      h1 {
+        font-size: 1.2rem;
+      }
+
+      form {
+        display: flex;
+        flex-direction: column;
+        gap: 32px;
+        width: 100%;
+      }
+      .error-message {
+        max-width: 90%;
+      }
+
+      form label {
+        color: #333232;
+        font-weight: 500;
+        width: 100%;
+        display: flex;
+        position: relative;
+        font-size: 1.3rem;
+        align-items: center;
+        margin-bottom: 8px;
+        justify-content: space-between;
+        letter-spacing: 0.2px;
+      }
+
+      form .emailBox .emailInputBox,
+      form .passwordBox .passwordInputBox {
+        display: flex;
+        color: #757575;
+        width: 100%;
+        height: fit-content;
+        position: relative;
+        font-size: 1rem;
+        min-width: 100px;
+        border-radius: 4px;
+      }
+
+      input {
+        color: #333232;
+        display: block;
+        border-radius: 10px;
+        padding: 15px;
+        font-weight: 700;
+        font-size: 1.3rem;
+        border: 2px solid transparent;
+        margin: 0;
+        width: 100%;
+        transition: border-color 0.3s ease;
+      }
+
+      input:focus {
+        outline: none; /* Remove the default outline */
+        border-color: #8b6eca; /* Set your desired focus border color */
+      }
+
+      .signUp {
+        display: flex;
+        width: 100%;
+        gap: 4px;
+        align-items: center;
+        justify-content: center;
+        letter-spacing: 0.2px;
+      }
+
+      .options {
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+      }
+
+      .rememberMe {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1rem;
+        color: #666;
+        cursor: pointer;
+        position: relative;
+      }
+
+      .rememberMe input {
+        appearance: none;
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        position: absolute;
+
+        left: 0;
+        width: 18px;
+        height: 18px;
+        cursor: pointer;
+        border: 1px solid #ddd;
+        border-radius: 4px;
+        background-color: #ffffff;
+        transition: background-color 0.3s ease, border-color 0.3s ease;
+      }
+
+      .rememberMe input:checked {
+        background-color: #8b6eca;
+        border-color: #8b6eca;
+      }
+
+      .rememberMe input:checked::after {
+        content: "";
+        position: absolute;
+        left: 12px;
+        top: 7px;
+        width: 5px;
+        height: 10px;
+        border: solid white;
+        border-width: 0 2px 2px 0;
+        transform: rotate(45deg);
+      }
+
+      .text {
+        margin-left: 40px;
+        color: #666;
+        cursor: pointer;
+      }
+      button {
+        border-radius: 20px;
+        font-size: 1rem;
+        font-weight: 700;
+        height: 50px;
+        padding: 20px;
+      }
+      .illustration-section {
+        width: 55%;
+        position: relative;
+        overflow: hidden;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .slide-container {
+        display: flex;
+        width: 300%;
+        transition: transform 1s ease-in-out;
+      }
+
+      .slide {
+        width: 100%;
+        flex-shrink: 0;
+        position: relative;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .slide:nth-child(1) {
+        background-image: url("{% static 'accounts/images/illustration30.jpg' %}");
+        min-height: 100vh;
+        background-size: cover;
+        background-position: center;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+
+      .slide:nth-child(2) {
+        background-image: url("{% static 'accounts/images/slidePic3.jpg' %}");
+        min-height: 100vh;
+        background-size: cover;
+        background-position: center;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+
+      .slide:nth-child(3) {
+        background-image: url("{% static 'accounts/images/slidePic2.jpg' %}");
+        min-height: 100vh;
+        background-size: cover;
+        background-position: center;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+
+      .slide-text {
+        color: rgb(230, 225, 225);
+        position: absolute;
+        bottom: 30px;
+        padding: 20px;
+        left: 0;
+        font-size: 1.6rem;
+        text-align: left;
+        max-width: 60%;
+      }
+
+      .slide-text h2 {
+        font-size: 1.8rem;
+        margin-bottom: 10px;
+        font-weight: bold;
+        color: white;
+      }
+
+      .slide-text p {
+        font-size: 1rem;
+        font-weight: 700;
+        color: white;
+      }
+
+      .navigation-dots {
+        position: absolute;
+        bottom: 20px;
+        left: 20px;
+        width: 100%;
+        display: flex;
+        gap: 10px;
+      }
+
+      .nav-dot {
+        background-color: rgba(255, 255, 255, 0.5);
+        width: 10px;
+        height: 10px;
+        border-radius: 50%;
+        cursor: pointer;
+      }
+
+      .nav-dot.active {
+        background-color: rgba(139, 110, 202, 255);
+      }
+
+      .error-message {
+        color: red;
+        margin-bottom: 10px;
+      }
+
+      button {
+        background-color: rgba(139, 110, 202, 255);
+        color: white;
+        border: none;
+        padding: 8px 32px;
+        border-radius: 4px;
+        cursor: pointer;
+      }
+
+      @media (max-width: 767px) {
+        .illustration-section {
+          display: none !important; /* Force hiding of the slides */
+        }
+
+        .rightPanel {
+          width: 100% !important; /* Ensure the right panel takes the full width */
+        }
+      }
+    
+    </style>
+  </head>
+
+  <body>
+    <div class="container">
+      <div class="illustration-section">
+        <div class="slide-container">
+          <div class="slide">
+            <div class="slide-text">
+              <h2>Say No to Stress with Sun Trust Bank</h2>
+              <p>
+                Experience hassle-free banking with our user-friendly interface
+                and top-notch customer service.
+              </p>
+            </div>
+          </div>
+          <div class="slide">
+            <div class="slide-text">
+              <h2>Secure Your Finances</h2>
+              <p>
+                Your security is our priority. Enjoy safe and secure
+                transactions with state-of-the-art encryption.
+              </p>
+            </div>
+          </div>
+          <div class="slide">
+            <div class="slide-text">
+              <h2>Fast, Reliable, and Convenient</h2>
+              <p>
+                Manage your accounts on the go with our fast, reliable, and
+                convenient banking solutions.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <div class="navigation-dots">
+          <div class="nav-dot" data-slide="0"></div>
+          <div class="nav-dot" data-slide="1"></div>
+          <div class="nav-dot" data-slide="2"></div>
+        </div>
+      </div>
+      <div class="rightPanel">
+        <div class="details">
+          <div class="formBox">
+          <img 
+          height="50px"
+          width="100%"
+          src="../static/sunTrustBank.png" alt="">
+            <h2 style="font-size: 2rem; color: black">Welcome Back!</h2>
+            <form method="post">
+              {% csrf_token %} {% if form.non_field_errors %}
+              <div class="error-message">
+                {% for error in form.non_field_errors %}
+                <p>{{ error }}</p>
+                {% endfor %}
+              </div>
+              {% endif %}
+
+              <div class="emailBox">
+                <label for="username">Username</label>
+                <div class="emailInputBox">
+                  <input
+                    type="text"
+                    id="username"
+                    name="username"
+                    value="{{ form.username.value|default_if_none:'' }}"
+                  />
+                </div>
+              </div>
+
+              <div class="passwordBox">
+                <label for="password"
+                  >Password
+                  <a
+                    href="/forgot-password"
+                    style="
+                      color: rgba(139, 110, 202, 255);
+                      font-weight: bold;
+                      font-size: 1rem;
+                    "
+                    >Forgot password?</a
+                  ></label
+                >
+                <div class="passwordInputBox">
+                  <input type="password" id="password" name="password" />
+                </div>
+              </div>
+
+              <div class="options">
+                <div class="rememberMe">
+                  <input
+                    type="checkbox"
+                    id="rememberMeCheckbox"
+                    name="remember_me"
+                  />
+                  <span class="checkmark"></span>
+                  <span class="text">Remember me</span>
+                </div>
+              </div>
+              <button type="submit">Sign in</button>
+            </form>
+            <div class="signUp">
+              <p style="color: #4d4d4d">
+                Don't have an account?
+                <a
+                  href="{% url 'signup' %}"
+                  style="
+                    font-weight: bold;
+                    color: #8B6ECA;
+                    font-size: 1rem;
+                  "
+                  >Sign Up</a
+                >
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      const dots = document.querySelectorAll(".nav-dot");
+      const slideContainer = document.querySelector(".slide-container");
+
+      dots.forEach((dot, index) => {
+        dot.addEventListener("click", () => {
+          slideContainer.style.transform = `translateX(-${index * 100}%)`;
+          dots.forEach((dot) => dot.classList.remove("active"));
+          dot.classList.add("active");
+        });
+      });
+
+      let currentIndex = 0;
+
+      function autoSlide() {
+        currentIndex = (currentIndex + 1) % dots.length;
+        slideContainer.style.transform = `translateX(-${currentIndex * 100}%)`;
+        dots.forEach((dot) => dot.classList.remove("active"));
+        dots[currentIndex].classList.add("active");
+      }
+
+      setInterval(autoSlide, 4000);
+    </script>
+  </body>
+</html>
